@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'screens/antibioticos_screen.dart';
+import 'screens/anticonvulsionantes_screen.dart';
+import 'screens/antiinflamatorios_screen.dart';
+import 'screens/antifungicos_screen.dart';
+import 'screens/broncodilatadores_screen.dart';
+import 'screens/hidratacaovenosa_screen.dart';
 import 'screens/puericultura_screen.dart';
+import 'screens/busca_screen.dart';
+import 'screens/configuracoes_screen.dart';
 
 void main() => runApp(MedPedApp());
 
@@ -56,9 +63,21 @@ class HomeScreen extends StatelessWidget {
         title: Text('MedPed'),
         actions: [
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: Icon(Icons.search),
             onPressed: () {
-              // TODO: Implementar tela sobre o projeto
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BuscaScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ConfiguracoesScreen()),
+              );
             },
           ),
         ],
@@ -145,28 +164,40 @@ class HomeScreen extends StatelessWidget {
                         'Antibióticos',
                         Icons.bug_report,
                         Color(0xFFE74C3C),
-                        () => _navigateToCategory(context, 'antibioticos'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AntibioticosScreen()),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Anti-convulsionantes',
                         Icons.psychology,
                         Color(0xFF9B59B6),
-                        () => _navigateToCategory(context, 'anticonvulsionantes'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AnticonvulsionantesScreen()),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Anti-inflamatórios',
                         Icons.local_fire_department,
                         Color(0xFFE67E22),
-                        () => _navigateToCategory(context, 'antiinflamatorios'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AntiinflamatoriosScreen()),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Anti-fúngicos',
                         Icons.eco,
                         Color(0xFF27AE60),
-                        () => _navigateToCategory(context, 'antifungicos'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => AntifungicosScreen()),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
@@ -187,7 +218,10 @@ class HomeScreen extends StatelessWidget {
                         'Broncodilatadores',
                         Icons.air,
                         Color(0xFF1ABC9C),
-                        () => _navigateToCategory(context, 'broncodilatadores'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => BroncodilatadoresScreen()),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
@@ -215,7 +249,10 @@ class HomeScreen extends StatelessWidget {
                         'Hidratação Venosa',
                         Icons.water_drop,
                         Color(0xFF00BCD4),
-                        () => _navigateToCategory(context, 'hidratacaovenosa'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HidratacaoVenosaScreen()),
+                        ),
                       ),
                     ],
                   ),
@@ -269,28 +306,48 @@ class HomeScreen extends StatelessWidget {
                         'Alimentação',
                         Icons.restaurant,
                         Colors.white,
-                        () => _navigateToCategory(context, 'alimentacao'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PuericulturaScreen(categoria: 'alimentacao'),
+                          ),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Crescimento',
                         Icons.trending_up,
                         Colors.white,
-                        () => _navigateToCategory(context, 'crescimento'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PuericulturaScreen(categoria: 'crescimento'),
+                          ),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Suplementação',
                         Icons.medication,
                         Colors.white,
-                        () => _navigateToCategory(context, 'suplementacao'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PuericulturaScreen(categoria: 'suplementacao'),
+                          ),
+                        ),
                       ),
                       _buildCategoryCard(
                         context,
                         'Vacinas',
                         Icons.vaccines,
                         Colors.white,
-                        () => _navigateToCategory(context, 'vacinas'),
+                        () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PuericulturaScreen(categoria: 'vacinas'),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -349,31 +406,11 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _navigateToCategory(BuildContext context, String category) {
-    switch (category) {
-      case 'antibioticos':
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AntibioticosScreen()),
-        );
-        break;
-      case 'alimentacao':
-      case 'crescimento':
-      case 'suplementacao':
-      case 'vacinas':
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PuericulturaScreen(categoria: category),
-          ),
-        );
-        break;
-      default:
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Categoria $category será implementada em breve!'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Categoria $category será implementada em breve!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 }
